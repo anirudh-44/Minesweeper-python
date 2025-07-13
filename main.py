@@ -1,4 +1,5 @@
 from tkinter import *
+from cell import Cell
 import settings
 import utils
 
