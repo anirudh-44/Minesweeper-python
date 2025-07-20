@@ -1,4 +1,5 @@
 from tkinter import Button
+import random
 
 class Cell:
     all = []
@@ -30,4 +31,14 @@ class Cell:
 
     @staticmethod
     def randomize_mines():
-        pass
+        picked_cells = random.sample(
+            Cell.all, 9
+        )
+        print(picked_cells)
+
+    def __repr__(self):                 
+        '''
+        we are overriding this method to display cell objects in a readable format instead
+        of some memory addresses
+        '''
+        return f"Cell({self.x},{self.y})"
