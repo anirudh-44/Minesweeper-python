@@ -17,7 +17,8 @@ class Cell:
         btn = Button(
             location,
             width = 12,
-            height = 4, 
+            height = 4,
+            text = f"{self.x},{self.y}" 
         )
         btn.bind('<Button-1>', self.left_click_actions)  #<Button-1> this is the convention in tkinter for left click also, note that we are just passing the method reference and not calling it.
         btn.bind('<Button-3>', self.right_click_actions) #right click
@@ -26,15 +27,28 @@ class Cell:
     def left_click_actions(self, event):
         if self.is_mine:
             self.show_mine()
+        else:
+            self.show_cell()
 
     def right_click_actions(self, event):
         print("right button clicked!")
 
     def show_mine(self):
         '''
-        logic to interrupt the game and display a message that player has lost
+        logic to interrupt the game and display a message that player has lost as player clicked on a mine
         '''
         self.cell_btn_object.configure(bg='red')
+
+    def show_cell(self):
+        pass
+
+    def get_cell_by_axis(self, x, y):
+        '''
+        return cell object based on the value of x,y
+        '''
+        for cell in Cell.all:
+            if (cell.x == x and cell.y == y):
+                return cell
 
     @staticmethod
     def randomize_mines():
