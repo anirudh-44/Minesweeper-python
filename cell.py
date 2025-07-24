@@ -40,7 +40,7 @@ class Cell:
         self.cell_btn_object.configure(bg='red')
 
     def show_cell(self):
-        pass
+        print(self.surrounded_cells)
 
     def get_cell_by_axis(self, x, y):
         '''
@@ -49,6 +49,22 @@ class Cell:
         for cell in Cell.all:
             if (cell.x == x and cell.y == y):
                 return cell
+
+    @property   #read only attribute
+    def surrounded_cells(self):
+        cells = [
+            self.get_cell_by_axis(self.x -1, self.y -1),
+            self.get_cell_by_axis(self.x -1, self.y),
+            self.get_cell_by_axis(self.x -1, self.y +1),
+            self.get_cell_by_axis(self.x, self.y -1),
+            self.get_cell_by_axis(self.x, self.y +1),
+            self.get_cell_by_axis(self.x +1, self.y -1),
+            self.get_cell_by_axis(self.x +1, self.y),
+            self.get_cell_by_axis(self.x +1, self.y +1),
+        ]
+
+        cells = [ cell for cell in cells if cell is not None ]
+        return cells
 
     @staticmethod
     def randomize_mines():
