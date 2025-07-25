@@ -40,7 +40,7 @@ class Cell:
         self.cell_btn_object.configure(bg='red')
 
     def show_cell(self):
-        print(self.surrounded_cells)
+        print(self.surrounded_cells_mines_count)
 
     def get_cell_by_axis(self, x, y):
         '''
@@ -65,6 +65,15 @@ class Cell:
 
         cells = [ cell for cell in cells if cell is not None ]
         return cells
+    
+    @property
+    def surrounded_cells_mines_count(self):
+        counter = 0
+        for cell in self.surrounded_cells:
+            if cell.is_mine:
+                counter +=1
+        
+        return counter
 
     @staticmethod
     def randomize_mines():
