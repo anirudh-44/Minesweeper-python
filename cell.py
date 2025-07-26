@@ -18,7 +18,6 @@ class Cell:
             location,
             width = 12,
             height = 4,
-            text = f"{self.x},{self.y}" 
         )
         btn.bind('<Button-1>', self.left_click_actions)  #<Button-1> this is the convention in tkinter for left click also, note that we are just passing the method reference and not calling it.
         btn.bind('<Button-3>', self.right_click_actions) #right click
@@ -40,7 +39,7 @@ class Cell:
         self.cell_btn_object.configure(bg='red')
 
     def show_cell(self):
-        print(self.surrounded_cells_mines_count)
+        self.cell_btn_object.configure(text = self.surrounded_cells_mines_count)
 
     def get_cell_by_axis(self, x, y):
         '''
