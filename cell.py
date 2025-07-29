@@ -4,6 +4,7 @@ import settings
 
 class Cell:
     all = []
+    cell_count = settings.CELL_COUNT
     cell_count_label_object = None
 
     def __init__(self, x, y, is_mime = False):
@@ -29,7 +30,10 @@ class Cell:
     def create_cell_count_label(location):
         label = Label(
             location,
-            text = f"Cells left:{settings.CELL_COUNT}"
+            bg = 'black',
+            fg = 'white',
+            text = f"Cells left:{Cell.cell_count}",
+            font=("Ariel", 30)
         )
         Cell.cell_count_label_object = label
 
@@ -52,7 +56,13 @@ class Cell:
         self.cell_btn_object.configure(bg='red')
 
     def show_cell(self):
+        Cell.cell_count -= 1
         self.cell_btn_object.configure(text = self.surrounded_cells_mines_count)
+        # Replace the text of cell count label with the newer count
+        if Cell.cell_count_label_object:
+            Cell.cell_count_label_object.configure(
+                text = f"Cells left:{Cell.cell_count}"
+            )
 
     def get_cell_by_axis(self, x, y):
         '''
