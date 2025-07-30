@@ -7,8 +7,9 @@ class Cell:
     cell_count = settings.CELL_COUNT
     cell_count_label_object = None
 
-    def __init__(self, x, y, is_mime = False):
-        self.is_mine = is_mime
+    def __init__(self, x, y, is_mine = False):
+        self.is_mine = is_mine
+        self.is_opened = False
         self.cell_btn_object = None
         self.x = x
         self.y = y
@@ -56,13 +57,16 @@ class Cell:
         self.cell_btn_object.configure(bg='red')
 
     def show_cell(self):
-        Cell.cell_count -= 1
-        self.cell_btn_object.configure(text = self.surrounded_cells_mines_count)
-        # Replace the text of cell count label with the newer count
-        if Cell.cell_count_label_object:
-            Cell.cell_count_label_object.configure(
-                text = f"Cells left:{Cell.cell_count}"
-            )
+        if not self.is_opened:
+            Cell.cell_count -= 1
+            self.cell_btn_object.configure(text = self.surrounded_cells_mines_count)
+            # Replace the text of cell count label with the newer count
+            if Cell.cell_count_label_object:
+                Cell.cell_count_label_object.configure(
+                    text = f"Cells left:{Cell.cell_count}"
+                )
+        # Mark the cell as opened (Use it as the last line of this method)
+        self.is_opened = True
 
     def get_cell_by_axis(self, x, y):
         '''
