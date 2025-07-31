@@ -10,6 +10,7 @@ class Cell:
     def __init__(self, x, y, is_mine = False):
         self.is_mine = is_mine
         self.is_opened = False
+        self.is_marked = False
         self.cell_btn_object = None
         self.x = x
         self.y = y
@@ -48,7 +49,11 @@ class Cell:
             self.show_cell()
 
     def right_click_actions(self, event):
-        print("right button clicked!")
+        if not self.is_marked:
+            self.cell_btn_object.configure(
+                bg='yellow'
+            )
+            self.is_marked = True
 
     def show_mine(self):
         '''
