@@ -54,6 +54,11 @@ class Cell:
                 bg='yellow'
             )
             self.is_marked = True
+        else:
+            self.cell_btn_object.configure(
+                bg = 'SystemButtonFace'
+            )
+            self.is_marked = False
 
     def show_mine(self):
         '''
