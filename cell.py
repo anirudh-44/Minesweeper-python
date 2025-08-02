@@ -1,6 +1,8 @@
 from tkinter import Button, Label
 import random
 import settings
+import ctypes # used to throw warnings (works in windows only)
+import sys
 
 class Cell:
     all = []
@@ -65,6 +67,8 @@ class Cell:
         logic to interrupt the game and display a message that player has lost as player clicked on a mine
         '''
         self.cell_btn_object.configure(bg='red')
+        ctypes.windll.user32.MessageBoxW(0, 'You clicked on a mine', 'Game Over', 0)
+        sys.exit()
 
     def show_cell(self):
         if not self.is_opened:
