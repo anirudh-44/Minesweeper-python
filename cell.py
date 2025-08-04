@@ -79,6 +79,10 @@ class Cell:
                 Cell.cell_count_label_object.configure(
                     text = f"Cells left:{Cell.cell_count}"
                 )
+            # If we left click on a already yellow tile, then if it is not a mine then it should be original bg color
+            self.cell_btn_object.configure(
+                bg='SystemButtonFace'
+            )
         # Mark the cell as opened (Use it as the last line of this method)
         self.is_opened = True
 
