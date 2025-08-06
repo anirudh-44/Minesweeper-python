@@ -49,6 +49,9 @@ class Cell:
                 for cell_obj in self.surrounded_cells:
                     cell_obj.show_cell()
             self.show_cell()
+            if Cell.cell_count == settings.MINES_COUNT: # player won
+                ctypes.windll.user32.MessageBoxW(0, 'Congrats, you won', 'Game Over', 0)
+
         
         # cancel left and right click events if cell is already opened
         self.cell_btn_object.unbind('<Button-1>')
